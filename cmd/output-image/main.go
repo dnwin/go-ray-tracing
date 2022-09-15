@@ -39,8 +39,10 @@ func renderImg(w io.Writer) {
 		stdout.Flush()
 
 		for x := 0; x < imageWidth; x++ {
+			// Red goes from fully off (0.0) to fully on (1.0) from left to right
 			r := float64(x) / float64(imageWidth-1)
-			g := float64(y) / float64(imageHeight-1)
+			// Green goes from fully off (0.0) to fully on (1.0) from bottom to top
+			g := float64(imageHeight-1-y) / float64(imageHeight-1)
 			b := 0.25
 
 			ir := uint8(255.99 * r)
