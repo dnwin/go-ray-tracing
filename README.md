@@ -1,13 +1,11 @@
 # Ray Tracer Go
 
-Go implementation of a ray tracer based on https://raytracing.github.io/
-
-## Run Example
-
-`go run cmd/output-image`
+Go implementation of ray tracing based on https://raytracing.github.io/
 
 ## Examples
 
-### output-image
+### [output-image](/cmd/output-image/main.go)
+
+`go run cmd/output-image`
 
 ![output-image](/assets/output-image.png?raw=true)
