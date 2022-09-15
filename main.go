@@ -1,29 +1,51 @@
 package main
 
-import "fmt"
+import (
+	"image"
+	"image/color"
+	"image/png"
+	"io"
+	"os"
+)
 
 func main() {
+	// Write PNG to file
+	const fn string = "/tmp/image.png"
+	f, err := os.Create(fn)
+	if err != nil {
+		panic(err)
+	}
+	renderImg(f)
+}
 
+// renderImg generates a rainbow PNG image.
+func renderImg(w io.Writer) {
 	// Image
 
 	const imageWidth int = 256
 	const imageHeight int = 256
 
-	// Render as PPM
+	upLeft := image.Point{0, 0}
+	lowRight := image.Point{imageWidth - 1, imageHeight - 1}
 
-	fmt.Printf("P3\n%d %d\n255\n", imageWidth, imageHeight)
+	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
 
-	for j := imageHeight - 1; j >= 0; j-- {
-		for i := 0; i < imageWidth; i++ {
-			r := float64(i) / float64(imageWidth-1)
-			g := float64(j) / float64(imageHeight-1)
+	// Render as PNG
+
+	for y := imageHeight - 1; y >= 0; y-- {
+		for x := 0; x < imageWidth; x++ {
+			r := float64(x) / float64(imageWidth-1)
+			g := float64(y) / float64(imageHeight-1)
 			b := 0.25
 
-			ir := int(255.99 * r)
-			ig := int(255.99 * g)
-			ib := int(255.99 * b)
+			ir := uint8(255.99 * r)
+			ig := uint8(255.99 * g)
+			ib := uint8(255.99 * b)
 
-			fmt.Printf("%d %d %d\n", ir, ig, ib)
+			clr := color.RGBA{ir, ig, ib, 0xff} // Opaque
+
+			img.Set(x, y, clr)
 		}
 	}
+	png.Encode(w, img)
 }
