@@ -8,14 +8,10 @@ import (
 	"image/png"
 	"io"
 	"os"
-	"path/filepath"
 )
 
 func main() {
 	// Write PNG to file
-	ex, _ := os.Executable()
-	p := filepath.Dir(ex)
-	fmt.Println("p", p)
 	f, err := os.Create("./assets/output-image.png")
 	if err != nil {
 		panic(err)
