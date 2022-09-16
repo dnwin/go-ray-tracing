@@ -1,4 +1,4 @@
-package raytrace
+package gfx
 
 type Ray struct {
 	Orig Point3

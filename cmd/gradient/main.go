@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	. "github.com/dnwin/go-ray-tracing/raytrace"
+	. "github.com/dnwin/go-ray-tracing/gfx"
 )
 
 func main() {

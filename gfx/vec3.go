@@ -1,4 +1,4 @@
-package raytrace
+package gfx
 
 import (
 	"fmt"
@@ -98,7 +98,7 @@ func (c Color3) RGBA() (r, g, b, a uint32) {
 	ir := uint8(255.99 * c.X())
 	ig := uint8(255.99 * c.Y())
 	ib := uint8(255.99 * c.Z())
-	ia := 0xff
+	ia := uint8(0xff)
 
 	r = uint32(ir)
 	r |= r << 8
