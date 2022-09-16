@@ -14,7 +14,8 @@ func (r Ray) Direction() Vec3 {
 }
 
 func (r Ray) At(t float64) Point3 {
-	u := r.Orig
+	u := r.Orig.Vec3
 	v := r.Dir.MulBy(t)
-	return Point3(v.Add(Vec3(u)))
+
+	return Point3{u.Add(v)}
 }
