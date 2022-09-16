@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"image"
-	"image/color"
 	"image/png"
 	"io"
 	"os"
@@ -55,7 +54,7 @@ func renderImg(w io.Writer) image.Image {
 
 			ray := Ray{Orig: origin, Dir: dir}
 			clr := rayColor(ray)
-			writeColor(img, i, j, clr)
+			WriteColor(img, i, j, clr)
 		}
 	}
 	fmt.Println("\nDone.")
@@ -80,17 +79,4 @@ func rayColor(ray Ray) Color {
 	blend := u.Add(v)
 
 	return Color(blend)
-}
-
-func writeColor(img *image.RGBA, x int, y int, clr Color) {
-	v := Vec3(clr)
-	r := v.X()
-	g := v.Y()
-	b := v.Z()
-	ir := uint8(255.99 * r)
-	ig := uint8(255.99 * g)
-	ib := uint8(255.99 * b)
-
-	rgba := color.RGBA{ir, ig, ib, 0xff} // Opaque
-	img.Set(x, y, rgba)
 }
