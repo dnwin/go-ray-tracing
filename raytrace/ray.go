@@ -1,20 +1,20 @@
 package raytrace
 
 type Ray struct {
-	orig Point3
-	dir  Vec3
+	Orig Point3
+	Dir  Vec3
 }
 
 func (r Ray) Origin() Point3 {
-	return r.orig
+	return r.Orig
 }
 
 func (r Ray) Direction() Vec3 {
-	return r.dir
+	return r.Dir
 }
 
 func (r Ray) At(t float64) Point3 {
-	u := Vec3(r.orig)
-	v := r.dir.MulBy(t)
-	return Point3(u.Add(v))
+	u := r.Orig
+	v := r.Dir.MulBy(t)
+	return Point3(v.Add(Vec3(u)))
 }
