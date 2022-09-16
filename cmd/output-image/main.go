@@ -6,7 +6,6 @@ import (
 	"image"
 	"image/color"
 	"image/png"
-	"io"
 	"os"
 )
 
@@ -17,11 +16,13 @@ func main() {
 		panic(err)
 	}
 	defer f.Close()
-	renderImg(f)
+
+	img := renderImg()
+	png.Encode(f, img)
 }
 
 // renderImg generates a rainbow PNG image.
-func renderImg(w io.Writer) {
+func renderImg() image.Image {
 	// Progress Indicator
 	stdout := bufio.NewWriter(os.Stdout)
 
@@ -55,8 +56,9 @@ func renderImg(w io.Writer) {
 			img.Set(x, y, clr)
 		}
 	}
-	png.Encode(w, img)
 
 	fmt.Fprintf(stdout, "\nDone.\n")
 	stdout.Flush()
+
+	return img
 }
