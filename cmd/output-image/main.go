@@ -16,6 +16,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
 	renderImg(f)
 }
 
