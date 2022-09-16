@@ -1,3 +1,3 @@
-module github.com/dnwin/ray-tracer-go
+module github.com/dnwin/go-ray-tracing
 
 go 1.19
