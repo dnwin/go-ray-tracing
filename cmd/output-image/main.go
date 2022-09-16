@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"image"
 	"image/color"
@@ -23,12 +22,10 @@ func main() {
 
 // renderImg generates a rainbow PNG image.
 func renderImg() image.Image {
-	// Progress Indicator
-	stdout := bufio.NewWriter(os.Stdout)
-
 	// Image
-	const imageWidth int = 256
-	const imageHeight int = 256
+	aspectRatio := 16.0 / 9.0
+	imageWidth := 400
+	imageHeight := int(float64(imageWidth) / aspectRatio)
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{imageWidth - 1, imageHeight - 1}
@@ -37,8 +34,7 @@ func renderImg() image.Image {
 
 	// Render as PNG
 	for y := imageHeight - 1; y >= 0; y-- {
-		fmt.Fprintf(stdout, "\rScanlines remaining: %d ", y)
-		stdout.Flush()
+		fmt.Printf("\rScanlines remaining: %d ", y)
 
 		for x := 0; x < imageWidth; x++ {
 			// Red goes from fully off (0.0) to fully on (1.0) from left to right
@@ -56,9 +52,7 @@ func renderImg() image.Image {
 			img.Set(x, y, clr)
 		}
 	}
-
-	fmt.Fprintf(stdout, "\nDone.\n")
-	stdout.Flush()
+	fmt.Printf("\nDone.\n")
 
 	return img
 }

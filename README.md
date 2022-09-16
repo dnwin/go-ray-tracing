@@ -8,12 +8,11 @@ Go implementation of ray tracing based on https://raytracing.github.io/
 
 `go run ./cmd/output-image`
 
-![output-image](/assets/output-image.png?raw=true)
+![output-image.png](/assets/output-image.png)
 
----
+## [gradient](/cmd/gradient/main.go)
 
-## [output-image](/cmd/output-image/main.go)
+`go run ./cmd/gradient`
 
-`go run ./cmd/output-image`
+![gradient.png](/assets/gradient.png)
 
-![output-image](/assets/output-image.png?raw=true)

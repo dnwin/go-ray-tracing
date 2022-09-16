@@ -33,11 +33,10 @@ func renderImg(w io.Writer) image.Image {
 	focalLength := 1.0
 
 	origin := MakePoint3(0, 0, 0)
-	o := Vec3(origin)
 	horizontal := MakeVec3(viewportWidth, 0, 0)
 	vertical := MakeVec3(0, viewportHeight, 0)
 	//  origin - horizontal/2 - vertical/2 - vec3(0, 0, focal_length);
-	lowerLeftCorner := o.Sub(horizontal.DivBy(2.0)).Sub(vertical.DivBy(2.0)).Sub(MakeVec3(0, 0, focalLength))
+	lowerLeftCorner := Vec3(origin).Sub(horizontal.DivBy(2.0)).Sub(vertical.DivBy(2.0)).Sub(MakeVec3(0, 0, focalLength))
 
 	// Render
 	upLeft := image.Point{0, 0}
@@ -50,14 +49,14 @@ func renderImg(w io.Writer) image.Image {
 			u := float64(i) / float64(imageWidth-1)
 			v := float64(imageHeight-1-j) / float64(imageHeight-1)
 			// lower_left_corner + u*horizontal + v*vertical - origin
-			dir := lowerLeftCorner.Add(horizontal.MulBy(u)).Add(vertical.MulBy(v)).Sub(o)
+			dir := lowerLeftCorner.Add(horizontal.MulBy(u)).Add(vertical.MulBy(v)).Sub(Vec3(origin))
 
 			ray := Ray{Orig: origin, Dir: dir}
 			clr := rayColor(ray)
 			WriteColor(img, i, j, clr)
 		}
 	}
-	fmt.Println("\nDone.")
+	fmt.Printf("\nDone.\n")
 
 	return img
 }
